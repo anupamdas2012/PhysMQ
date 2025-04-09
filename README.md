@@ -2,6 +2,9 @@
 
 **PhysMQ** is a lightweight, high-performance robotics framework designed for real-time messaging and modular control across multiple devices. Inspired by the strengths of ROS2 but streamlined for simplicity and speed, PhysMQ brings pub-sub architecture to small-scale and hobbyist robotics without the overhead.
 
+## Architecture
+
+https://docs.google.com/presentation/d/1f1eRD8RnnVLCw0jto0wMqtCDd42WziRb9aMDKrXjFuY/edit?usp=sharing
 ---
 
 ## Features
