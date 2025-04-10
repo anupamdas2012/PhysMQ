@@ -33,3 +33,21 @@ https://docs.google.com/presentation/d/1f1eRD8RnnVLCw0jto0wMqtCDd42WziRb9aMDKrXj
 ```bash
 git clone https://github.com/yourusername/physmq.git
 cd physmq
+
+### 2. install deps
+python3 -m venv mqtt-venv
+source mqtt-venv/bin/activate
+pip install paho-mqtt
+
+### 3. install broker
+sudo apt-get install mosquitto mosquitto-clients
+
+### 4. start broker and check that broker has started
+sudo systemctl start mosquitto 
+sudo systemctl status mosquitto
+
+### 5. enable broker on boot (optional)
+sudo systemctl enable mosquitto
+
+
+
