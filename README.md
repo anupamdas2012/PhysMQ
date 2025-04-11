@@ -25,6 +25,8 @@ https://docs.google.com/presentation/d/1f1eRD8RnnVLCw0jto0wMqtCDd42WziRb9aMDKrXj
   Designed for ultra-low-latency messaging in control loops and sensor feedback.
 
 ---
+## NOTE, we depricated the MQTT version in favor of ZeroMQ. This elimates the need for a broker
+## the mqtt version is prefized mqtt_
 
 ## Getting Started
 
@@ -34,20 +36,22 @@ https://docs.google.com/presentation/d/1f1eRD8RnnVLCw0jto0wMqtCDd42WziRb9aMDKrXj
 git clone https://github.com/yourusername/physmq.git
 cd physmq
 
-### 2. install deps
-python3 -m venv mqtt-venv
-source mqtt-venv/bin/activate
-pip install paho-mqtt
+### 2. install deps (ZeroMQ)
+python3 -m venv venv
+source venv/bin/activate
+pip install pyzmq
 
-### 3. install broker
-sudo apt-get install mosquitto mosquitto-clients
+### 3. start subscriber
+python3 subscriber.py
 
-### 4. start broker and check that broker has started
-sudo systemctl start mosquitto 
-sudo systemctl status mosquitto
+### 4. start publisher
+python3 publisher.py
 
-### 5. enable broker on boot (optional)
-sudo systemctl enable mosquitto
+### 4. Note topic pub/sub output in console
+
+### 5: ZeroMQ pubsub pattern tutorial:
+https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/pubsub.html
+
 
 
 

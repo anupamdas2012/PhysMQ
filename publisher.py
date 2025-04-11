@@ -1,20 +1,18 @@
-# publisher.py
-import paho.mqtt.client as mqtt
+import zmq
 import time
 
-BROKER = 'localhost'
-TOPIC = 'robot/blink'
+context = zmq.Context()
+socket = context.socket(zmq.PUB)
+socket.bind("tcp://*:5555")
 
-client = mqtt.Client()
-client.connect(BROKER, 1883, 60)
+topic = "ledController"
+state = "ON"
+
+time.sleep(1)  # Let subscribers connect
 
 while True:
-    message = "On"
-    client.publish(TOPIC, message)
-    print(f"Published: {message}")
+    message = f"{topic} {state}"
+    print(f"Sent: {message}")
+    socket.send_string(message)
     time.sleep(2)
-
-    message = "Off"
-    client.publish(TOPIC, message)
-    print(f"Published: {message}")
-    time.sleep(2)
+    state = "OFF" if state == "ON" else "ON"

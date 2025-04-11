@@ -1,19 +1,13 @@
-# subscriber.py
-import paho.mqtt.client as mqtt
+import zmq
 
-BROKER = 'localhost'
-TOPIC = 'robot/blink'
+context = zmq.Context()
+socket = context.socket(zmq.SUB)
+socket.connect("tcp://localhost:5555")
 
-def on_connect(client, userdata, flags, rc):
-    print(f"Connected with result code {rc}")
-    client.subscribe(TOPIC)
+topic_filter = "ledController"
+socket.setsockopt_string(zmq.SUBSCRIBE, topic_filter)
 
-def on_message(client, userdata, msg):
-    print(f"Received on {msg.topic}: {msg.payload.decode()}")
-
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-
-client.connect(BROKER, 1883, 60)
-client.loop_forever()
+for _ in range(5):  # Just to see a few messages
+    string = socket.recv_string()
+    topic, messagedata = string.split()
+    print(f"Topic: {topic}, Message: {messagedata}")
